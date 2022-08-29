@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+    <script src="pagination.js"></script>
+    <script src="getData.js"></script>
+    <script src="filter.js"></script>
+</head>
+
+<body>
+    <h1 style="text-align: center; color:#05050594">Employees data</h1>
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p id="txtHint">Loading...</p>
+        </div>
+    </div>
+    <div id="loading" class="loader-modal">
+        <div class="loader-container">
+            <div class="loader"></div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="content">
+
+            <div class="filter">
+                <div class="jender">
+                    <h5>jender:</h5>
+                    <input type="checkbox" id="jender" name="male" value="53">
+                    <label for="male">Male</label><br>
+                    <input type="checkbox" id="jender" name="female" value="55">
+                    <label for="female">Femail</label><br>
+                </div>
+                <div class="jender">
+                    <h5>Education:</h5>
+                    <input type="checkbox" id="education" name="diploma" value="45">
+                    <label for="diploma">diploma</label><br>
+                    <input type="checkbox" id="education" name="Phd" value="51">
+                    <label for="Phd">PHd</label><br>
+                    <input type="checkbox" id="education" name="Bachelor" value="47">
+                    <label for="Bachelor">Bachelor's degree</label><br>
+                    <input type="checkbox" id="education" name="Master" value="49">
+                    <label for="Master">Master's</label><br>
+                </div>
+                
+                <div class="jender">
+                    <h5>Position:</h5>
+                <input type="checkbox" id="post" name="designer" value="designer">
+                <label for="designer">designer</label><br>
+                <input type="checkbox" id="post" name="accountant" value="accountant">
+                <label for="accountant">accountant</label><br>
+                <input type="checkbox" id="post" name="reception" value="reception">
+                <label for="reception">reception</label><br>
+                <input type="checkbox" id="post" name="call" value="call center">
+                <label for="call">call center</label><br>
+                <input type="checkbox" id="post" name="hr" value="hr manager">
+                <label for="hr">hr manager</label><br>
+                <input type="checkbox" id="post" name="software" value="software programer">
+                <label for="software">software</label><br>
+                <input type="checkbox" id="post" name="developer" value="developer">
+                <label for="developer">developer</label><br>
+                <input type="checkbox" id="post" name="hr" value="hr">
+                <label for="hr">hr</label><br>
+                <input type="checkbox" id="post" name="mba" value="mba">
+                <label for="mba">mba</label><br>
+                <input type="checkbox" id="post" name="web" value="web developer">
+                <label for="web">web developer</label><br>
+                </div>
+                <button id="getCheckboxesButton" class="btn">Filter</button>
+            </div>
+            <div style="width: 100%">
+
+                <div class="pagination">
+                    <input id="dataLenght" type='hidden' />
+                    <button id="showAll" class="btn2">All rows</button>
+                    <ol id="numbers">
+                    </ol>
+                </div>
+
+
+                <table id="my-table" style="width: 100%">
+                    <thead>
+                        <tr>
+                            <th>Full Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Company</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+<script>
+    var modal = document.getElementById("myModal");
+
+    var btn = document.getElementById("myBtn");
+
+    var span = document.getElementsByClassName("close")[0];
+
+    function showDetails(id) {
+
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if (this.status == 200) {
+                document.getElementById("txtHint").innerHTML = this.responseText;
+            }
+        };
+        xmlhttp.open("GET", "details.php?ID=" + id, true);
+        xmlhttp.send();
+        modal.style.display = "block";
+    }
+
+    span.onclick = function() {
+        document.getElementById("txtHint").innerHTML = "Loading...";
+        modal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    };
+</script>
+</body>
+</html>
